@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Exercise Tester</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
+  <style type="text/css">
+  #qunit-tests .link {
+    color: #366097;
+  }
+  .modal {
+    background-color: white;
+    border: 1px solid silver;
+    color: #2B81AF;
+    font-family: Trebuchet MS, sans-serif;
+    padding: 1em;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    box-shadow: 5px 5px silver;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+  .modal.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  .close-btn {
+    position: absolute;
+    color: gray;
+    padding: 3px;
+    top: 5px;
+    right: 5px;
+  }
+  </style>
+</head>
+<body>
+  <div id="exercise-description" class="modal"></div>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+<!-- Make a solutions.js file with your answers -->
+<script src="solutions.js"></script>
+
+<!-- Here are the exercises and their test cases -->
+<script>
+const exercises = {
+  basics: {
+    maxOfThree: {
+      arguments: 'three arguments',
+      returns: 'the largest of the arguments',
+      tests: [
+        { inputs: [3, 1, 5], output: 5 },
+        { inputs: [1, 3, 5], output: 5 },
+        { inputs: [1, 5, 3], output: 5 },
+        { inputs: [3, 5, 1], output: 5 },
+        { inputs: [5, 1, 3], output: 5 },
+        { inputs: [5, 3, 1], output: 5 },
+        { inputs: [3, 3, 3], output: 3 },
+        { inputs: [-1, -3, -5], output: -1 },
+      ]
+    },
+  },
+  strings: {
+    makeFullName: {
+      arguments: 'up to three arguments: <i>first</i>, <i>last</i>, and <i>middle</i>',
+      returns: 'a combined name of the form first middle last, separated by single spaces',
+      tests: [
+        { inputs: ['Mary', 'Jones'], output: 'Mary Jones' },
+        { inputs: ['Mary', 'Jones', 'Q.'], output: 'Mary Q. Jones' },
+        { inputs: ['Sting'], output: 'Sting' },
+        { inputs: ['H.', 'Lovecraft', 'P.'], output: 'H. P. Lovecraft' },
+      ]
+    },
+    reverseString: {
+      arguments: 'a string',
+      returns: 'the string in reverse',
+      tests: [
+        { inputs: ['JavaScript'], output: 'tpircSavaJ' },
+        { inputs: ['a'], output: 'a' },
+        { inputs: [''], output: '' },
+      ]
+    },
+    capitalize: {
+      arguments: 'a string with zero or more words',
+      returns: 'the string with the first letter of every word capitalized',
+      tests: [
+        { inputs: ['The quick brown fox'], output: 'The Quick Brown Fox' },
+        { inputs: ['12 angry men'], output: '12 Angry Men' },
+        { inputs: ['a'], output: 'A' },
+        { inputs: [''], output: '' },
+      ]
+    },
+  },
+  map: {
+    makeHtmlList: {
+      arguments: 'an array of strings',
+      returns: 'a string with an HTML list of those strings',
+      tests: [
+        { inputs: [['Mercury', 'Venus', 'Earth']], 
+          output: '<ul><li>Mercury</li><li>Venus</li><li>Earth</li></ul>'
+        },
+        { inputs: [[]], output: '' },
+      ]
+    },
+    makeNumberedList: {
+      arguments: 'an array of strings',
+      returns: 'a string with the HTML for a list of those strings',
+      tests: [
+        { inputs: [['Mercury', 'Venus', 'Earth']], 
+          output: ['1. Mercury', '2. Venus', '3. Earth']
+        },
+        { inputs: [[]], output: [] },
+      ]
+    },
+  },
+  filter: {
+    getEvens: {
+      arguments: 'an array of integers',
+      returns: 'an array of just the even integers, in the same order',
+      tests: [
+        { inputs: [[1, 2, 3, 4, 5]],  output: [2, 4] },
+        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
+        { inputs: [[]], output: [] },
+      ]
+    },
+    getRepeats: {
+      arguments: 'an array',
+      returns: 'an array of each repeating item',
+      tests: [
+        { inputs: [[1, 2, 2, 3, 4, 5, 3, 1]],  output: [1, 2, 3] },
+        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
+        { inputs: [[3, 6, 67, -6, 23, 6, 11, 100, 23, 6, 0, 3]],
+          output: [3, 6, 23]
+        },
+        { inputs: [[]], output: [] },
+      ]
+    },
+  },
+  reduce: {
+    getSmallest: {
+      arguments: 'an array of numbers',
+      returns: 'the smallest number in the array',
+      tests: [
+        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 0 },
+        { inputs: [[5, 2, 1, 4, 3]],  output: 1 },
+        { inputs: [[-5, -1, -8, 0]],  output: -8 },
+      ]
+    },
+    getLargest: {
+      arguments: 'an array of numbers',
+      returns: 'the largest number in the array',
+      tests: [
+        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 5 },
+        { inputs: [[5, 2, 1, 4, 3]],  output: 5 },
+        { inputs: [[-5, -1, -8, 0]],  output: 0 },
+      ]
+    }
+  },
+};
+</script>
+
+<!-- Add the exercise info above to QUnit -->
+
+<script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
+
+<script>
+// define the test modules
+Object.keys(exercises).forEach(moduleName => {
+  const module = exercises[moduleName];
+  QUnit.module(moduleName);
+  Object.keys(module).forEach(name => {
+    const exercise = module[name];
+    QUnit.test(name, assert => {
+      exercise.tests.forEach(({inputs, output}) => {
+        const inStr = inputs.map(JSON.stringify).join(', ');
+        assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} OK`);
+      });
+    });
+  });
+});
+
+// add exercise descriptions to the report when tests complete
+
+QUnit.done(details => {
+  Array.from(document.querySelectorAll('.module-name'))
+    .map(elt => elt.closest('[id'))
+    .forEach(attachDescriptionLink);
+});
+
+function attachDescriptionLink(elt) {
+  const moduleName = elt.querySelector('.module-name').innerText;
+  const testName = elt.querySelector('.test-name').innerText;
+  const exercise = exercises[moduleName] && exercises[moduleName][testName];
+  if (exercise) {
+    const rerunLink = elt.querySelector('a');
+    const exerciseLink = document.createElement('a');
+    exerciseLink.classList.add('link');
+    exerciseLink.appendChild(document.createTextNode('Show exercise'));
+    exerciseLink.onclick = () => { showExercise(moduleName, testName); };
+    elt.insertBefore(exerciseLink, rerunLink.nextSibling);
+  }
+}
+
+// display the exercise definition 
+const exerciseModal = document.querySelector('#exercise-description');
+
+function showExercise(moduleName, testName) {
+  exerciseModal.innerHTML = makeDescriptionHtml(moduleName, testName);
+  exerciseModal.classList.add('visible');  
+}
+
+// Note: uses the first test case as an example
+function makeDescriptionHtml(moduleName, testName) {
+  const exercise = exercises[moduleName][testName];
+  const inStr = exercise.tests[0].inputs.map(safeString).join(', ');
+  const outStr = safeString(exercise.tests[0].output);
+  return `<span class="close-btn">&cross;</span>Define <b>${testName}</b> \
+to take ${exercise.arguments} and return ${exercise.returns}. \
+Example: <tt>${testName}(${inStr})</tt> returns <tt>${outStr}</tt>`;
+}
+
+function safeString(str) {
+  return JSON.stringify(str).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+}
+
+exerciseModal.onclick = () => exerciseModal.classList.remove('visible');
+</script>
+</body>
+</html>
