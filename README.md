@@ -37,7 +37,7 @@ function sumOfSquares(x, y) {
 }
 ```
 
-Reload **test.html**. The report should show that the first two tests pass, but the third test fails. 
+Save **solutions.js** and reload **test.html**. The report should show that the first two tests pass, but the third test fails. 
 
 Now change your solution to the correct code:
 
@@ -47,7 +47,7 @@ function sumOfSquares(x, y) {
 }
 ```
 
-Reload **test.html**. The report should show that all tests for **sumOfSquares** pass. To see what those tests were, click on the **sumOfSquares** label in the report.
+Save **solutions.js** and reload **test.html**. The report should show that all tests for **sumOfSquares** pass. To see what those tests were, click on the **sumOfSquares** label in the report.
 
 For more on using the QUnit test interface, see [this tutorial](https://code.tutsplus.com/tutorials/how-to-test-your-javascript-code-with-qunit--net-9077).
 
