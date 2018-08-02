@@ -2,6 +2,8 @@
 
 This is a set of introductory exercises for JavaScript, with test cases. The exercises emphasize modern JavaScript iteration methods, such as map and filter, over the older while and for forms.
 
+This is neither a tutorial, nor an attempt at an exhaustive set of exercises. The goal is to be simple but not completely inane. 
+
 ## Getting Started
 
 Everything you need is in one HTML file. In addition, you have to create a file to hold your JavaScript code.
