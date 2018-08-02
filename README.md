@@ -4,6 +4,10 @@ This is a set of introductory exercises for JavaScript, with test cases. The exe
 
 This is neither a tutorial, nor an attempt at an exhaustive set of exercises. The goal is to be simple but not completely inane. 
 
+The demo [tests.html](https://criesbeck.github.io/js-exercise-tester/tests.html)
+shows the interface a few exercises defined,  one solution, and one partial
+solution.
+
 ## Getting Started
 
 Everything you need is in one HTML file. In addition, you have to create a file to hold your JavaScript code.
