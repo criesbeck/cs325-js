@@ -57,6 +57,8 @@ The exercises are divided into modules that focus on different basic topics in J
 
 * **basics** -- working functions, arithmetic, and conditionals
 * **strings** -- building and manipulating strings
+* **arrays** -- working with arrays
+* **objects** -- working with JavaScript objects
 * **map** -- processing lists with **map**
 * **filter** -- processing lists with **filter**
 * **reduce** -- processing lists with **reduce**
