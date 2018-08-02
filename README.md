@@ -27,7 +27,7 @@ For example, the first test that fails is **sumOfSquares**.
 
 Clicking on _Show exercise_ next to **sumOfSquares** to see a description of what you need to do. For this example, you need to define a function **sumOfSquares** to take two numbers, square them, and return the sum. The description lists the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 5.
 
-In your file **solutions.js**, add the following code. This is deliberately wrong so that you can see what partial success looks like.
+Put the following code into your file **solutions.js**. This code is deliberately wrong, so that you can see what partial success looks like.
 
 ```
 function sumOfSquares(x, y) {
@@ -49,6 +49,15 @@ Reload **test.html**. The report should show that all tests for **sumOfSquares**
 
 For more on using the QUnit test interface, see [this tutorial](https://code.tutsplus.com/tutorials/how-to-test-your-javascript-code-with-qunit--net-9077).
 
+## The Exercises
+
+The exercises are divided into modules that focus on different basic topics in JavaScript. This very preliminary release has the following modules: 
+
+* **basics** -- working functions, arithmetic, and conditionals
+* **strings** -- building and manipulating strings
+* **map** -- processing lists with **map**
+* **filter** -- processing lists with **filter**
+* **reduce** -- processing lists with **reduce**
 
 ## Built With
 
