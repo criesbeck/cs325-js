@@ -16,7 +16,7 @@ Everything you need is in one HTML file. In addition, you have to create a file 
 ### Installing
 
   * Download [tests.html](tests.html) into a folder.
-  * Create an empty text file called ***solutions.js** in the same folder. 
+  * Create an empty text file called **solutions.js** in the same folder. 
   * Open **tests.html** in your browser to see the QUnit report on tests passed and failed.
 
 Initially all tests will fail because you have not defined any functions.
