@@ -49,6 +49,15 @@
 <script>
 const exercises = {
   basics: {
+    sumOfSquares: {
+      arguments: 'two numbers',
+      returns: 'the sum of the squares of the two numbers',
+      tests: [
+        { inputs: [3, 4], output: 25 },
+        { inputs: [1, 2], output: 5 },
+        { inputs: [-3, -4], output: 25 },
+      ]
+    },
     maxOfThree: {
       arguments: 'three arguments',
       returns: 'the largest of the arguments',
@@ -175,9 +184,10 @@ Object.keys(exercises).forEach(moduleName => {
   Object.keys(module).forEach(name => {
     const exercise = module[name];
     QUnit.test(name, assert => {
+      assert.ok(window[name], `${name} is defined`);
       exercise.tests.forEach(({inputs, output}) => {
         const inStr = inputs.map(JSON.stringify).join(', ');
-        assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} OK`);
+        assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} tested`);
       });
     });
   });
@@ -216,11 +226,18 @@ function showExercise(moduleName, testName) {
 // Note: uses the first test case as an example
 function makeDescriptionHtml(moduleName, testName) {
   const exercise = exercises[moduleName][testName];
-  const inStr = exercise.tests[0].inputs.map(safeString).join(', ');
-  const outStr = safeString(exercise.tests[0].output);
+  const testCases = 
+    exercise.tests.map(test => makeTestCaseHtml(testName, test))
+      .join('');
   return `<span class="close-btn">&cross;</span>Define <b>${testName}</b> \
-to take ${exercise.arguments} and return ${exercise.returns}. \
-Example: <tt>${testName}(${inStr})</tt> returns <tt>${outStr}</tt>`;
+to take ${exercise.arguments} and return ${exercise.returns}.\
+<ul>${testCases}</ul>`;
+}
+
+function makeTestCaseHtml(name, test) {
+  const inStr = test.inputs.map(safeString).join(', ');
+  const outStr = safeString(test.output);
+  return `<li><tt>${name}(${inStr})</tt> returns <tt>${outStr}</tt></li>`;
 }
 
 function safeString(str) {
