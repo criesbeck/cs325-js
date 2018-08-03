@@ -127,9 +127,17 @@ const exercises = {
     },
   },
   arrays: {
-    sortArray: {
+    sortedArray: {
       arguments: 'one array',
-      returns: 'the array, sorted',
+      returns: 'a sorted copy of the array. NOTE: the original array should not be affected',
+      links: [
+        { text: 'sorting in JavaScript',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort'
+        },
+        { text: 'copying arrays',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from'
+        }
+      ],
       tests: [
         { inputs: [[5, 2, -1, 4, 7, 5]], output: [-1, 2, 4, 5, 5, 7] },
         { inputs: [[5]], output: [5] },

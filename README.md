@@ -1,21 +1,22 @@
 # js-exercise-tester
 
-This is a set of introductory exercises for JavaScript, with test cases. The exercises emphasize modern JavaScript iteration methods, such as map and filter, over the older while and for forms.
+This is an evolving set of introductory exercises for JavaScript, with test cases. The exercises emphasize modern JavaScript iteration methods, such as map and filter, over the older while and for forms.
 
 This is neither a tutorial, nor an attempt at an exhaustive set of exercises. The goal is to offer some simple challenges that are not completely inane. 
 
 The demo [tests.html](https://criesbeck.github.io/js-exercise-tester/tests.html)
-shows the interface a few exercises defined,  one solution, and one partial
-solution.
+shows the interface, with just a few exercises specified,  one solved, and one partially solved.
+
+![Exercise Tester Screenshot](js-tester.png?raw=true)
 
 ## Getting Started
 
-Everything you need is in one HTML file. In addition, you have to create a file to hold your JavaScript code.
+You need one HTML file to test code in a JavaScript file you create.
 
 ### Prerequisites
 
   * Any modern web browser with a developer console, such as Chrome or Firefox
-  * A good text editor, such as Visual Studio Code, BBedit, or Sublime
+  * A good text editor, such as Visual Studio Code, BBedit, or Sublime, for editing your JavaScript file
 
 ### Installing
 
@@ -33,7 +34,7 @@ Solutions should be functionally clean. Unless specified by the exercise,
 * No input objects should be modified.
 * Results should be returned as values, not printed.
 
-Most exercises can be done with one short function, but feel free to define helper functions if they make the solution clearer.
+Most exercises can be done with one short function, but feel free to define helper functions if they make your solution clearer.
 
 Start with the first exercise. 
 
