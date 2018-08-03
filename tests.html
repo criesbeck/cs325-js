@@ -68,6 +68,23 @@ const exercises = {
         { inputs: [-3, -4], output: 25 },
       ]
     },
+    triangleArea: {
+      arguments: 'three numbers, representing the lengths of the sides of a triangle',
+      returns: 'the area of the triangle',
+      links: [
+        { text: 'Heron\'s Formula',
+          href: 'https://www.mathsisfun.com/geometry/herons-formula.html'
+        },
+        { text: 'Square root in JavaScript',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt'
+        },
+      ],
+      tests: [
+        { inputs: [3, 4, 5], output: 6 },
+        { inputs: [5, 5, 5], output: 10.825317547305483 },
+        { inputs: [0, 3, 3], output: 0 },
+      ]
+    },
   },
   conditionals: {
     between: {
