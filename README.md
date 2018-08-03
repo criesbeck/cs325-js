@@ -2,7 +2,7 @@
 
 This is a set of introductory exercises for JavaScript, with test cases. The exercises emphasize modern JavaScript iteration methods, such as map and filter, over the older while and for forms.
 
-This is neither a tutorial, nor an attempt at an exhaustive set of exercises. The goal is to be simple but not completely inane. 
+This is neither a tutorial, nor an attempt at an exhaustive set of exercises. The goal is to offer some simple challenges that are not completely inane. 
 
 The demo [tests.html](https://criesbeck.github.io/js-exercise-tester/tests.html)
 shows the interface a few exercises defined,  one solution, and one partial
@@ -25,13 +25,30 @@ Everything you need is in one HTML file. In addition, you have to create a file 
 
 Initially all tests will fail because you have not defined any functions.
 
-### Using
+## The Exercises
 
-Your goal is to write function definitions in the file **solutions.js** to pass all the tests.
+The exercises are divided into modules. Each module introduces a topic in JavaScript. Topics accumulate. Solutions to exercises in later modules will often require topics from earlier modules.
 
-For example, the first test that fails is **sumOfSquares**.
+Solutions should be functionally clean. Unless specified by the exercise,
+* No input objects should be modified.
+* Results should be returned as values, not printed.
 
-Clicking on _Show exercise_ next to **sumOfSquares** to see a description of what you need to do. For this example, you need to define a function **sumOfSquares** to take two numbers, square them, and return the sum. The description lists the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 5.
+Most exercises can be done with one short function, but feel free to define helper functions if they make the solution clearer.
+
+Start with the first exercise. 
+
+* Click on _Show exercise_ to see what you need to define. 
+* Write a function definition in the file **solutions.js** that you think will work. 
+* Save that file, and load (or reload) your local copy of **tests.html** in your browser. 
+* Fix your code until it passes all the tests.
+
+Work your way down the list of exercises.
+
+### Example
+
+The first exercise is **sumOfSquares**.
+
+Clicking on _Show exercise_ next to **sumOfSquares** shows a box that says you need to define the function **sumOfSquares** to take two numbers, square them, and return the sum. The description includes the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 25.
 
 Put the following code into your file **solutions.js**. This code is deliberately wrong, so that you can see what partial success looks like.
 
@@ -41,7 +58,7 @@ function sumOfSquares(x, y) {
 }
 ```
 
-Save **solutions.js** and reload **test.html**. The report should show that the first two tests pass, but the third test fails. 
+Save **solutions.js** and reload **test.html**. The report should show that the some tests pass, but some fail. 
 
 Now change your solution to the correct code:
 
@@ -53,19 +70,11 @@ function sumOfSquares(x, y) {
 
 Save **solutions.js** and reload **test.html**. The report should show that all tests for **sumOfSquares** pass. To see what those tests were, click on the **sumOfSquares** label in the report.
 
+## Resources
+
+A readable, reasonably up to date, reference that covers all the JavaScript you need is [The Modern JavaScript Tutorial](https://javascript.info/). 
+
 For more on using the QUnit test interface, see [this tutorial](https://code.tutsplus.com/tutorials/how-to-test-your-javascript-code-with-qunit--net-9077).
-
-## The Exercises
-
-The exercises are divided into modules that focus on different basic topics in JavaScript. This very preliminary release has the following modules: 
-
-* **basics** -- working functions, arithmetic, and conditionals
-* **strings** -- building and manipulating strings
-* **arrays** -- working with arrays
-* **objects** -- working with JavaScript objects
-* **map** -- processing lists with **map**
-* **filter** -- processing lists with **filter**
-* **reduce** -- processing lists with **reduce**
 
 ## Built With
 

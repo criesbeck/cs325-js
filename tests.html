@@ -58,7 +58,7 @@
 // Every function entry should have arguments, returns, and tests. links are
 // optional. 
 const exercises = {
-  basics: {
+  arithmetic: {
     sumOfSquares: {
       arguments: 'two numbers',
       returns: 'the sum of the squares of the two numbers',
@@ -68,6 +68,8 @@ const exercises = {
         { inputs: [-3, -4], output: 25 },
       ]
     },
+  },
+  conditionals: {
     maxOfThree: {
       arguments: 'three arguments',
       returns: 'the largest of the arguments',
@@ -271,8 +273,7 @@ Object.keys(exercises).forEach(moduleName => {
 
 QUnit.done(details => {
   Array.from(document.querySelectorAll('.module-name'))
-    .map(elt => elt.closest('[id'))
-    .forEach(attachDescriptionLink);
+    .forEach(elt => { attachDescriptionLink(elt.closest('[id]')); });
 });
 
 function attachDescriptionLink(elt) {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>JavaScript Exercise Tester</title>
+  <title>DEMO JavaScript Exercise Tester</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
   <style type="text/css">
   #qunit-tests .link {
@@ -124,8 +124,7 @@ Object.keys(exercises).forEach(moduleName => {
 
 QUnit.done(details => {
   Array.from(document.querySelectorAll('.module-name'))
-    .map(elt => elt.closest('[id'))
-    .forEach(attachDescriptionLink);
+    .forEach(elt => { attachDescriptionLink(elt.closest('[id]')); });
 });
 
 function attachDescriptionLink(elt) {
