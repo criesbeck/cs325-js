@@ -44,6 +44,8 @@ Most exercises can be done with one short function, but feel free to define help
 * The page will show which tests your code passed, and the first one that failed.
 * Fix your code until it passes all the tests.
 
+Hint: [Open the developer console in your browser](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools#How_to_open_the_devtools_in_your_browser) when working on exercises. That way you'll see any error messages that happen when your code is loaded or run. Some browsers won't reload a changed JavaScript source file unless the developer window is open.
+
 Work your way down the list of exercises.
 
 Unless specified otherwise by the exercise requirements, solution code should not
@@ -54,9 +56,9 @@ Unless specified otherwise by the exercise requirements, solution code should no
 
 The first exercise is **sumOfSquares**.
 
-Clicking on <button>?</button> next to **sumOfSquares** shows that you need to define a function **sumOfSquares** to take two numbers, square them, and return the sum. The description includes the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 25.
+Clicking on <button>?</button> next to **sumOfSquares** shows that you need to define a function **sumOfSquares** to take two numbers, square them, and return the sum. The description includes the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 25, i.e., 3 squared plus 4 squared.
 
-Put the following code into your file **solutions.js**. This code is deliberately wrong, so that you can see what partial success looks like.
+Put the following *deliberately wrong* code into your file **solutions.js**, so that you can see what partial success looks like.
 
 ```
 function sumOfSquares(x, y) {
