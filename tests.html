@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
   <style type="text/css">
   #qunit-tests .link {
-    color: #366097;
+    color: #528CE0;
   }
   .block {
     margin-top: 0.5em;
@@ -48,17 +48,13 @@
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
 
-<!-- Make a solutions.js file with your answers -->
+<!-- Loads the solutions.js file that you create with your answers -->
 <script src="solutions.js"></script>
 
-<!-- Here are the exercises and their test cases -->
+<!-- Define the exercises and their test cases -->
 <script>
-// The top-level keys become QUnit module names.
-// In each module, the top-level keys are the functions to be defined and tested.
-// Every function entry should have arguments, returns, and tests. links are
-// optional. 
 const exercises = {
-  arithmetic: {
+  basics: {
     sumOfSquares: {
       arguments: 'two numbers',
       returns: 'the sum of the squares of the two numbers',
@@ -85,11 +81,9 @@ const exercises = {
         { inputs: [0, 3, 3], output: 0 },
       ]
     },
-  },
-  conditionals: {
     between: {
-      arguments: 'three numbers',
-      returns: 'the first is between the other two',
+      arguments: 'three numbers, x, y, and z',
+      returns: 'true if y <= x <= z',
       tests: [
         { inputs: [3, 1, 5], output: true },
         { inputs: [1, 3, 5], output: false },
@@ -154,16 +148,74 @@ backward, if n < m), up to but not including the final element',
         { inputs: [['a', 'b', 'c', 'd', 'e'], 3, 3,], output: [] },
       ]
     },
-  },
-  objects: {
-    over21: {
-      arguments: 'a JavaScript object, with keys for name and age',
-      returns: 'true if the person is 21 or older',
+    subArray: {
+      arguments: 'two arrays, arr and indices, where indices is an array of integers',
+      returns: 'the array of elements in arr at the given indices',
       tests: [
-        { inputs: [{ name: 'John', age: 12 }], output: false },
-        { inputs: [{ age: 29, name: 'Mary' }], output: true }
+        { inputs: [['a', 'b', 'c', 'd', 'e'], [3, 1]], output: ['d', 'b'] },
+        { inputs: [['a', 'b', 'c', 'd', 'e'], []], output: [] },
+        { inputs: [['a', 'b', 'c', 'd', 'e'], [0, 0]], output: ['a', 'a'] },
       ]
-    }
+    },
+    getEvens: {
+      arguments: 'an array of integers',
+      returns: 'an array of just the even integers, in the same order',
+      tests: [
+        { inputs: [[1, 2, 3, 4, 5]],  output: [2, 4] },
+        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
+        { inputs: [[]], output: [] },
+      ]
+    },
+    getRepeats: {
+      arguments: 'an array',
+      returns: 'an array of each repeating item',
+      tests: [
+        { inputs: [[1, 2, 2, 3, 4, 5, 3, 1]],  output: [1, 2, 3] },
+        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
+        { inputs: [[3, 6, 67, -6, 23, 6, 11, 100, 23, 6, 0, 3]],
+          output: [3, 6, 23]
+        },
+        { inputs: [[]], output: [] },
+      ]
+    },
+    getSmallest: {
+      arguments: 'an array of numbers',
+      returns: 'the smallest number in the array',
+      tests: [
+        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 0 },
+        { inputs: [[5, 2, 1, 4, 3]],  output: 1 },
+        { inputs: [[-5, -1, -8, 0]],  output: -8 },
+      ]
+    },
+    getLargest: {
+      arguments: 'an array of numbers',
+      returns: 'the largest number in the array',
+      tests: [
+        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 5 },
+        { inputs: [[5, 2, 1, 4, 3]],  output: 5 },
+        { inputs: [[-5, -1, -8, 0]],  output: 0 },
+      ]
+    },
+    getNames: {
+      arguments: 'an array of "person" objects, each with a name and other data',
+      returns: 'a sorted array of just the names',
+      tests: [
+        { inputs: [[{ name: 'John', age: 12 }, { name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }]],
+          output: ['Annie', 'John', 'Mary'] },
+        { inputs: [[{ name: 'John', age: 12 }, { age: 19, name: 'Glenda' }]],
+          output: ['Glenda', 'John'] },
+      ]
+    },
+    over21: {
+      arguments: 'an array of "person" objects, each with a name and age keys',
+      returns: 'an array of the people 21 or older',
+      tests: [
+        { inputs: [[{ name: 'John', age: 12 }, { name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }]],
+          output: [{ name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }] },
+        { inputs: [[{ name: 'John', age: 12 }, { age: 19, name: 'Glenda' }]],
+          output: [] },
+      ]
+    },
   },
   strings: {
     makeFullName: {
@@ -206,17 +258,6 @@ backward, if n < m), up to but not including the final element',
         { inputs: ['', ''], output: true },
       ]
     },
-  },
-  map: {
-    subArray: {
-      arguments: 'two arrays, arr and indices, where indices is an array of integers',
-      returns: 'the array of elements in arr at the given indices',
-      tests: [
-        { inputs: [['a', 'b', 'c', 'd', 'e'], [3, 1]], output: ['d', 'b'] },
-        { inputs: [['a', 'b', 'c', 'd', 'e'], []], output: [] },
-        { inputs: [['a', 'b', 'c', 'd', 'e'], [0, 0]], output: ['a', 'a'] },
-      ]
-    },
     makeHtmlList: {
       arguments: 'an array of strings',
       returns: 'a string with an HTML list of those strings',
@@ -229,7 +270,7 @@ backward, if n < m), up to but not including the final element',
     },
     makeNumberedList: {
       arguments: 'an array of strings',
-      returns: 'a string with the HTML for a list of those strings',
+      returns: 'an array of numbered strings',
       tests: [
         { inputs: [['Mercury', 'Venus', 'Earth']], 
           output: ['1. Mercury', '2. Venus', '3. Earth']
@@ -237,49 +278,6 @@ backward, if n < m), up to but not including the final element',
         { inputs: [[]], output: [] },
       ]
     },
-  },
-  filter: {
-    getEvens: {
-      arguments: 'an array of integers',
-      returns: 'an array of just the even integers, in the same order',
-      tests: [
-        { inputs: [[1, 2, 3, 4, 5]],  output: [2, 4] },
-        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
-        { inputs: [[]], output: [] },
-      ]
-    },
-    getRepeats: {
-      arguments: 'an array',
-      returns: 'an array of each repeating item',
-      tests: [
-        { inputs: [[1, 2, 2, 3, 4, 5, 3, 1]],  output: [1, 2, 3] },
-        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
-        { inputs: [[3, 6, 67, -6, 23, 6, 11, 100, 23, 6, 0, 3]],
-          output: [3, 6, 23]
-        },
-        { inputs: [[]], output: [] },
-      ]
-    },
-  },
-  reduce: {
-    getSmallest: {
-      arguments: 'an array of numbers',
-      returns: 'the smallest number in the array',
-      tests: [
-        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 0 },
-        { inputs: [[5, 2, 1, 4, 3]],  output: 1 },
-        { inputs: [[-5, -1, -8, 0]],  output: -8 },
-      ]
-    },
-    getLargest: {
-      arguments: 'an array of numbers',
-      returns: 'the largest number in the array',
-      tests: [
-        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 5 },
-        { inputs: [[5, 2, 1, 4, 3]],  output: 5 },
-        { inputs: [[-5, -1, -8, 0]],  output: 0 },
-      ]
-    }
   },
 };
 </script>
@@ -318,9 +316,9 @@ function attachDescriptionLink(elt) {
   const exercise = exercises[moduleName] && exercises[moduleName][testName];
   if (exercise) {
     const rerunLink = elt.querySelector('a');
-    const exerciseLink = document.createElement('a');
+    const exerciseLink = document.createElement('button');
     exerciseLink.classList.add('link');
-    exerciseLink.appendChild(document.createTextNode('Show exercise'));
+    exerciseLink.appendChild(document.createTextNode('?'));
     exerciseLink.onclick = () => { showExercise(moduleName, testName); };
     elt.insertBefore(exerciseLink, rerunLink.nextSibling);
   }
@@ -330,9 +328,17 @@ function attachDescriptionLink(elt) {
 const exerciseModal = document.querySelector('#exercise-description');
 
 function showExercise(moduleName, testName) {
-  const contentElt = exerciseModal.querySelector('.content');
-  contentElt.innerHTML = makeDescriptionHtml(moduleName, testName);
-  exerciseModal.classList.add('visible');  
+  const oldEx = exerciseModal.dataset.showing;
+  const newEx = moduleName + ':' + testName;
+  if (oldEx === newEx) {
+    exerciseModal.classList.toggle('visible');  
+  }
+  else {
+    exerciseModal.dataset.showing = newEx;
+    const contentElt = exerciseModal.querySelector('.content');
+    contentElt.innerHTML = makeDescriptionHtml(moduleName, testName);
+    exerciseModal.classList.add('visible');
+  }
 }
 
 function makeDescriptionHtml(moduleName, testName) {

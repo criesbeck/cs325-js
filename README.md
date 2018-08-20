@@ -28,28 +28,33 @@ Initially all tests will fail because you have not defined any functions.
 
 ## The Exercises
 
-The exercises are divided into modules. Each module introduces a topic in JavaScript. Topics accumulate. Solutions to exercises in later modules will often require topics from earlier modules.
+The exercises are divided into modules. 
 
-Solutions should be functionally clean. Unless specified by the exercise,
-* No input objects should be modified.
-* Results should be returned as values, not printed.
+* **basics**: solutions involve functions, variables, calculation, and conditionals
+* **arrays**: solutions involve arrays of both simple data and JavaScript objects, and operations that loop over such arrays
+* **strings**: solutions involve strings, string operations, and loops over arrays of strings
+
+Topics accumulate. Solutions to exercises in later modules will often require topics from earlier modules. Earlier exercises have simpler solutions, so do them in order.
 
 Most exercises can be done with one short function, but feel free to define helper functions if they make your solution clearer.
 
-Start with the first exercise. 
-
-* Click on _Show exercise_ to see what you need to define. 
-* Write a function definition in the file **solutions.js** that you think will work. 
+* Click <button>?</button> to see what the exercise asks for. 
+* Write a function definition in your file **solutions.js** that you think will work. 
 * Save that file, and load (or reload) your local copy of **tests.html** in your browser. 
+* The page will show which tests your code passed, and the first one that failed.
 * Fix your code until it passes all the tests.
 
 Work your way down the list of exercises.
+
+Unless specified otherwise by the exercise requirements, solution code should not
+* modify input objects
+* print anything
 
 ### Example
 
 The first exercise is **sumOfSquares**.
 
-Clicking on _Show exercise_ next to **sumOfSquares** shows a box that says you need to define the function **sumOfSquares** to take two numbers, square them, and return the sum. The description includes the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 25.
+Clicking on <button>?</button> next to **sumOfSquares** shows that you need to define a function **sumOfSquares** to take two numbers, square them, and return the sum. The description includes the tests cases your code needs to pass, e.g., <tt>sumOfSquares(3, 4)</tt> should return 25.
 
 Put the following code into your file **solutions.js**. This code is deliberately wrong, so that you can see what partial success looks like.
 
