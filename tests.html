@@ -210,8 +210,8 @@ backward, if n < m), up to but not including the final element',
       arguments: 'an array of "person" objects, each with a name and age keys',
       returns: 'an array of the people 21 or older',
       tests: [
-        { inputs: [[{ name: 'John', age: 12 }, { name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }]],
-          output: [{ name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }] },
+        { inputs: [[{ name: 'John', age: 12 }, { name: 'Annie', age: 41 }, { age: 21, name: 'Mary' }]],
+          output: [{ name: 'Annie', age: 41 }, { age: 21, name: 'Mary' }] },
         { inputs: [[{ name: 'John', age: 12 }, { age: 19, name: 'Glenda' }]],
           output: [] },
       ]
