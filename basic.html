@@ -49,99 +49,15 @@
   <div id="qunit-fixture"></div>
 
 <!-- Loads the solutions.js file that you create with your answers -->
-<script src="solutions.js"></script>
+<script src="basic-solutions.js"></script>
 
 <!-- Define the exercises and their test cases -->
 <script>
 const exercises = {
-  basics: {
-    sumOfSquares: {
-      arguments: 'two numbers',
-      returns: 'the sum of the squares of the two numbers',
-      tests: [
-        { inputs: [3, 4], output: 25 },
-        { inputs: [1, 2], output: 5 },
-        { inputs: [-3, -4], output: 25 },
-      ]
-    },
-    triangleArea: {
-      arguments: 'three numbers, representing the lengths of the sides of a triangle',
-      returns: 'the area of the triangle',
-      links: [
-        { text: 'Heron\'s Formula',
-          href: 'https://www.mathsisfun.com/geometry/herons-formula.html'
-        },
-        { text: 'Square root in JavaScript',
-          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt'
-        },
-      ],
-      tests: [
-        { inputs: [3, 4, 5], output: 6 },
-        { inputs: [5, 5, 5], output: 10.825317547305483 },
-        { inputs: [0, 3, 3], output: 0 },
-      ]
-    },
-    between: {
-      arguments: 'three numbers, x, y, and z',
-      returns: 'true if y <= x <= z',
-      tests: [
-        { inputs: [3, 1, 5], output: true },
-        { inputs: [1, 3, 5], output: false },
-        { inputs: [3, 5, 1], output: true },
-        { inputs: [5, 1, 3], output: false },
-        { inputs: [-4, -3, -5], output: true },
-      ]
-    },
-    maxOfThree: {
-      arguments: 'three arguments',
-      returns: 'the largest of the arguments',
-      tests: [
-        { inputs: [3, 1, 5], output: 5 },
-        { inputs: [1, 3, 5], output: 5 },
-        { inputs: [1, 5, 3], output: 5 },
-        { inputs: [3, 5, 1], output: 5 },
-        { inputs: [5, 1, 3], output: 5 },
-        { inputs: [5, 3, 1], output: 5 },
-        { inputs: [3, 3, 3], output: 3 },
-        { inputs: [-1, -3, -5], output: -1 },
-      ]
-    },
-    isLeapYear: {
-      arguments: 'an integer',
-      returns: 'true if the integer is a leap year</a>',
-      links: [
-        { text: 'Leap year rules', href: 'http://www.wwu.edu/skywise/leapyear.html'}
-      ],
-      tests: [
-        { inputs: [2004], output: true },
-        { inputs: [2001], output: false },
-        { inputs: [2000], output: true },
-        { inputs: [1900], output: false },
-      ]
-    },
-  },
-  arrays: {
-    sortedArray: {
-      arguments: 'one array',
-      returns: 'a sorted copy of the array. NOTE: the original array should not be affected',
-      links: [
-        { text: 'sorting in JavaScript',
-          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort'
-        },
-        { text: 'copying arrays',
-          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from'
-        }
-      ],
-      tests: [
-        { inputs: [[5, 2, -1, 4, 7, 5]], output: [-1, 2, 4, 5, 5, 7] },
-        { inputs: [[5]], output: [5] },
-        { inputs: [[]], output: [] },
-      ]
-    },
+  basic: {
     backSlice: {
-      arguments: 'an array arr and two integers, m and n',
-      returns: 'the array of elements in arr, from arr[m] forward (or \
-backward, if n < m), up to but not including the final element',
+      arguments: 'an array A and two integers, m and n',
+      returns: 'the array of elements in A, from A[m] to A[n-1], if m < n, or A[n] to A[m-1], if n < m',
       tests: [
         { inputs: [['a', 'b', 'c', 'd', 'e'], 1, 3], output: ['b', 'c'] },
         { inputs: [['a', 'b', 'c', 'd', 'e'], 3, 1,], output: ['d', 'c'] },
@@ -157,15 +73,6 @@ backward, if n < m), up to but not including the final element',
         { inputs: [['a', 'b', 'c', 'd', 'e'], [0, 0]], output: ['a', 'a'] },
       ]
     },
-    getEvens: {
-      arguments: 'an array of integers',
-      returns: 'an array of just the even integers, in the same order',
-      tests: [
-        { inputs: [[1, 2, 3, 4, 5]],  output: [2, 4] },
-        { inputs: [[3, 7, 11, 13, 17]],  output: [] },
-        { inputs: [[]], output: [] },
-      ]
-    },
     getRepeats: {
       arguments: 'an array',
       returns: 'an array of each repeating item',
@@ -178,34 +85,6 @@ backward, if n < m), up to but not including the final element',
         { inputs: [[]], output: [] },
       ]
     },
-    getSmallest: {
-      arguments: 'an array of numbers',
-      returns: 'the smallest number in the array',
-      tests: [
-        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 0 },
-        { inputs: [[5, 2, 1, 4, 3]],  output: 1 },
-        { inputs: [[-5, -1, -8, 0]],  output: -8 },
-      ]
-    },
-    getLargest: {
-      arguments: 'an array of numbers',
-      returns: 'the largest number in the array',
-      tests: [
-        { inputs: [[1, 2, 2, 5, 0, 3]],  output: 5 },
-        { inputs: [[5, 2, 1, 4, 3]],  output: 5 },
-        { inputs: [[-5, -1, -8, 0]],  output: 0 },
-      ]
-    },
-    getNames: {
-      arguments: 'an array of "person" objects, each with a name and other data',
-      returns: 'a sorted array of just the names',
-      tests: [
-        { inputs: [[{ name: 'John', age: 12 }, { name: 'Annie', age: 41 }, { age: 29, name: 'Mary' }]],
-          output: ['Annie', 'John', 'Mary'] },
-        { inputs: [[{ name: 'John', age: 12 }, { age: 19, name: 'Glenda' }]],
-          output: ['Glenda', 'John'] },
-      ]
-    },
     over21: {
       arguments: 'an array of "person" objects, each with a name and age keys',
       returns: 'an array of the people 21 or older',
@@ -216,48 +95,6 @@ backward, if n < m), up to but not including the final element',
           output: [] },
       ]
     },
-  },
-  strings: {
-    makeFullName: {
-      arguments: 'up to three arguments: <i>first</i>, <i>last</i>, and <i>middle</i>',
-      returns: 'a combined name of the form first middle last, separated by single spaces',
-      tests: [
-        { inputs: ['Mary', 'Jones'], output: 'Mary Jones' },
-        { inputs: ['Mary', 'Jones', 'Q.'], output: 'Mary Q. Jones' },
-        { inputs: ['Sting'], output: 'Sting' },
-        { inputs: ['H.', 'Lovecraft', 'P.'], output: 'H. P. Lovecraft' },
-      ]
-    },
-    reverseString: {
-      arguments: 'a string',
-      returns: 'the string in reverse',
-      tests: [
-        { inputs: ['JavaScript'], output: 'tpircSavaJ' },
-        { inputs: ['a'], output: 'a' },
-        { inputs: [''], output: '' },
-      ]
-    },
-    capitalize: {
-      arguments: 'a string with zero or more words',
-      returns: 'the string with the first letter of every word capitalized',
-      tests: [
-        { inputs: ['The quick brown fox'], output: 'The Quick Brown Fox' },
-        { inputs: ['12 angry men'], output: '12 Angry Men' },
-        { inputs: ['a'], output: 'A' },
-        { inputs: [''], output: '' },
-      ]
-    },
-    isAnagram: {
-      arguments: 'two words',
-      returns: 'true if the words are anagrams of each other',
-      tests: [
-        { inputs: ['spear', 'spare'], output: true },
-        { inputs: ['spear', 'sparse'], output: false },
-        { inputs: ['dog', 'cat'], output: false },
-        { inputs: ['a', 'a'], output: true },
-        { inputs: ['', ''], output: true },
-      ]
-    },
     makeHtmlList: {
       arguments: 'an array of strings',
       returns: 'a string with an HTML list of those strings',
@@ -266,16 +103,6 @@ backward, if n < m), up to but not including the final element',
           output: '<ul><li>Mercury</li><li>Venus</li><li>Earth</li></ul>'
         },
         { inputs: [[]], output: '' },
-      ]
-    },
-    makeNumberedList: {
-      arguments: 'an array of strings',
-      returns: 'an array of numbered strings',
-      tests: [
-        { inputs: [['Mercury', 'Venus', 'Earth']], 
-          output: ['1. Mercury', '2. Venus', '3. Earth']
-        },
-        { inputs: [[]], output: [] },
       ]
     },
   },
