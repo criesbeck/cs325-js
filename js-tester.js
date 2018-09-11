@@ -17,11 +17,12 @@ Object.keys(exercises).forEach(moduleName => {
 // add exercise descriptions to the report when tests complete
 
 QUnit.done(details => {
+  const modal = createModal();
   Array.from(document.querySelectorAll('.module-name'))
-    .forEach(elt => { attachDescriptionLink(elt.closest('[id]')); });
+    .forEach(elt => { attachDescriptionLink(elt.closest('[id]'), modal); });
 });
 
-function attachDescriptionLink(elt) {
+function attachDescriptionLink(elt, modal) {
   const moduleName = elt.querySelector('.module-name').innerText;
   const testName = elt.querySelector('.test-name').innerText;
   const exercise = exercises[moduleName] && exercises[moduleName][testName];
@@ -30,25 +31,40 @@ function attachDescriptionLink(elt) {
     const exerciseLink = document.createElement('button');
     exerciseLink.classList.add('link');
     exerciseLink.appendChild(document.createTextNode('?'));
-    exerciseLink.onclick = () => { showExercise(moduleName, testName); };
+    exerciseLink.onclick = () => { showExercise(moduleName, testName, modal); };
     elt.insertBefore(exerciseLink, rerunLink.nextSibling);
   }
 }
 
-// display the exercise definition 
-const exerciseModal = document.querySelector('#exercise-description');
+// modal for displaying the exercise definition 
+function createModal() {
+  const modal =
+    addElement('<div class="modal"><span class="close-btn">&cross;</span><div class="content"></div></div>');
+  modal.querySelector('span').onclick = () => {
+    modal.classList.remove('visible');
+  }
+  return modal;
+}
 
-function showExercise(moduleName, testName) {
-  const oldEx = exerciseModal.dataset.showing;
+// https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro/35385518#35385518
+function addElement(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html.trim();
+  document.body.appendChild(template.content.firstChild);
+  return document.body.lastChild;
+}
+
+function showExercise(moduleName, testName, modal) {
+  const oldEx = modal.dataset.showing;
   const newEx = moduleName + ':' + testName;
   if (oldEx === newEx) {
-    exerciseModal.classList.toggle('visible');  
+    modal.classList.toggle('visible');  
   }
   else {
-    exerciseModal.dataset.showing = newEx;
-    const contentElt = exerciseModal.querySelector('.content');
+    modal.dataset.showing = newEx;
+    const contentElt = modal.querySelector('.content');
     contentElt.innerHTML = makeDescriptionHtml(moduleName, testName);
-    exerciseModal.classList.add('visible');
+    modal.classList.add('visible');
   }
 }
 
@@ -81,7 +97,3 @@ function makeLinkHtml(link) {
 function escapeHtml(str) {
   return JSON.stringify(str).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 }
-
-exerciseModal.querySelector('.close-btn').onclick = () => {
-  exerciseModal.classList.remove('visible');
-};

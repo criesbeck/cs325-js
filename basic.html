@@ -8,17 +8,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="exercise-description" class="modal">
-    <span class="close-btn">&cross;</span>
-    <div class="content"></div>
-  </div>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
 
 <!-- Loads the solutions file that YOU create with your answers -->
 <script src="basic-solutions.js"></script>
 
-<!-- Define the exercises and their test cases -->
+<!-- Defines the exercises and their test cases -->
 <script>
 const exercises = {
   basic: {
@@ -76,8 +72,8 @@ const exercises = {
 };
 </script>
 
+<!-- The testing code -->
 <script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
-
 <script src="js-tester.js"></script>
 </body>
 </html>
