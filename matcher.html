@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JavaScript Matcher Tests</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+<!-- Loads the solutions file that YOU create with your answers -->
+<script src="matcher-solutions.js"></script>
+
+<!-- Defines the exercises and their test cases -->
+<script>
+const exercises = {
+  primitives: {
+    match: {
+      arguments: 'two primitive values, pat and obj',
+      returns: 'success if pat and obj are equal',
+      tests: [
+        { inputs: [1, 1], output: [[]]},
+        { inputs: [3, 1,], output: [] },
+        { inputs: ['abc', 'abc'], output: [[]] },
+        { inputs: ['abc', 'ABC'], output: [] },
+        { inputs: ['10', 10], output: [] },
+        { inputs: [true, true], output: [[]] },
+        { inputs: [false, true], output: [] },
+      ]
+    },
+  },
+  arrays: {
+    match: {
+      arguments: 'two arrays, pat and obj',
+      returns: 'success if pat and obj are arrays of matching values',
+      tests: [
+        { inputs: [[], []], output: [[]] },
+        { inputs: [[1], [1]], output: [[]] },
+        { inputs: [[1], [2]], output: [] },
+        { inputs: [[1], [1, 2]], output: [] },
+        { inputs: [[[1, 2], [3, 4]], [[1, 2], [3, 4]]], output: [[]] },
+        { inputs: [[[1, 2], [3, 4]], [[1, 2], [4]]], output: [] },
+      ]
+    },
+  },
+  objects: {
+    match: {
+      arguments: 'two objects, pat and obj',
+      returns: 'success if pat and obj have the same keys, with matching values',
+      tests: [
+        { inputs: [{}, {}], output: [[]] },
+        { inputs: [{ a: 1, b: 2}, { b: 2, a: 1 }], output: [[]] },
+        { inputs: [{ a: 1, b: 2}, { a: 1 }], output: [] },
+        { inputs: [{ a: 1, b: 2}, { a: 1, b: 1 }], output: [] },
+        { inputs: [{ a: 1, b: 2}, { a: 1, c: 1 }], output: [] },
+        { inputs: [{ a: [1, 2], b: 2}, { b: 2, a: [1, 2] }], output: [[]] },
+        { inputs: [{ a: { c: 1, d: 3 }, b: 2}, { b: 2, a: { d: 3, c: 1 } }], output: [[]] },
+
+      ]
+    },
+  },
+};
+</script>
+
+<!-- The testing code -->
+<script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
+<script src="js-tester.js"></script>
+</body>
+</html>
