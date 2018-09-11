@@ -1,0 +1,32 @@
+#qunit-tests .link {
+  color: #528CE0;
+}
+.block {
+  margin-top: 0.5em;
+}
+.modal {
+  background-color: white;
+  border: 1px solid silver;
+  color: #2B81AF;
+  font-family: Trebuchet MS, sans-serif;
+  padding: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px silver;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+.modal.visible {
+  visibility: visible;
+  opacity: 1;
+}
+.close-btn {
+  position: absolute;
+  color: gray;
+  padding: 3px;
+  top: 5px;
+  right: 5px;
+}
