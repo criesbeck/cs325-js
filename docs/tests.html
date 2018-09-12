@@ -5,46 +5,9 @@
   <meta name="viewport" content="width=device-width">
   <title>DEMO JavaScript Exercise Tester</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
-  <style type="text/css">
-  #qunit-tests .link {
-    color: #366097;
-  }
-  .block {
-    margin-top: 0.5em;
-  }
-  .modal {
-    background-color: white;
-    border: 1px solid silver;
-    color: #2B81AF;
-    font-family: Trebuchet MS, sans-serif;
-    padding: 1em;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 5px 5px silver;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-  }
-  .modal.visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  .close-btn {
-    position: absolute;
-    color: gray;
-    padding: 3px;
-    top: 5px;
-    right: 5px;
-  }
-  </style>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <div id="exercise-description" class="modal">
-    <span class="close-btn">&cross;</span>
-    <div class="content"></div>
-  </div>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
 
@@ -99,90 +62,9 @@ const exercises = {
 };
 </script>
 
-<!-- Add the exercise info above to QUnit -->
-
+<!-- The testing code -->
 <script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
+<script src="../js-tester.js"></script>
 
-<script>
-// define the test modules
-Object.keys(exercises).forEach(moduleName => {
-  const module = exercises[moduleName];
-  QUnit.module(moduleName);
-  Object.keys(module).forEach(name => {
-    const exercise = module[name];
-    QUnit.test(name, assert => {
-      assert.ok(window[name], `${name} is defined`);
-      exercise.tests.forEach(({inputs, output}) => {
-        const inStr = inputs.map(JSON.stringify).join(', ');
-        assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} tested`);
-      });
-    });
-  });
-});
-
-// add exercise descriptions to the report when tests complete
-
-QUnit.done(details => {
-  Array.from(document.querySelectorAll('.module-name'))
-    .forEach(elt => { attachDescriptionLink(elt.closest('[id]')); });
-});
-
-function attachDescriptionLink(elt) {
-  const moduleName = elt.querySelector('.module-name').innerText;
-  const testName = elt.querySelector('.test-name').innerText;
-  const exercise = exercises[moduleName] && exercises[moduleName][testName];
-  if (exercise) {
-    const rerunLink = elt.querySelector('a');
-    const exerciseLink = document.createElement('a');
-    exerciseLink.classList.add('link');
-    exerciseLink.appendChild(document.createTextNode('Show exercise'));
-    exerciseLink.onclick = () => { showExercise(moduleName, testName); };
-    elt.insertBefore(exerciseLink, rerunLink.nextSibling);
-  }
-}
-
-// display the exercise definition 
-const exerciseModal = document.querySelector('#exercise-description');
-
-function showExercise(moduleName, testName) {
-  const contentElt = exerciseModal.querySelector('.content');
-  contentElt.innerHTML = makeDescriptionHtml(moduleName, testName);
-  exerciseModal.classList.add('visible');  
-}
-
-function makeDescriptionHtml(moduleName, testName) {
-  const exercise = exercises[moduleName][testName];
-  const links = makeUl('Links', exercise.links, makeLinkHtml);
-  const testCases = 
-    makeUl('Tests', exercise.tests, test => makeTestCaseHtml(testName, test));
-  return `Define <b>${testName}</b> to take ${exercise.arguments} \
-and return ${exercise.returns}.\
-${links}${testCases}`;
-}
-
-function makeUl(label, lst, fn) {
-  return (!lst || lst.length === 0) ? '' : 
-   `<div class="block">${label}:<ul>${lst.map(item => `<li>${fn(item)}</ii>`)
-      .join('')}</ul></div>`;
-}
-
-function makeTestCaseHtml(name, test) {
-  const inStr = test.inputs.map(escapeHtml).join(', ');
-  const outStr = escapeHtml(test.output);
-  return `<tt>${name}(${inStr})</tt> returns <tt>${outStr}</tt>`;
-}
-
-function makeLinkHtml(link) {
-  return `<a href="${link.href}" target="_blank">${link.text || link.href}</a>`;
-}
-
-function escapeHtml(str) {
-  return JSON.stringify(str).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-}
-
-exerciseModal.querySelector('.close-btn').onclick = () => {
-  exerciseModal.classList.remove('visible');
-};
-</script>
 </body>
 </html>
