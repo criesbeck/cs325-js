@@ -12,10 +12,6 @@ exercises specified,  one solved, and one partially solved.
 
 ![Exercise Tester Screenshot](js-tester.png?raw=true)
 
-## Getting Started
-
-You need one HTML file to test code in a JavaScript file you create.
-
 ### Prerequisites
 
   * Any modern web browser with a developer console, such as Chrome or Firefox
@@ -42,11 +38,11 @@ directory to hold your JavaScript answers.
 
 The exercises are divided into separate files for different topic areas. 
 
-* [Basic](https://github.com/criesbeck/cs325-js/blob/master/basic-tests.html) a few 
+* [basic-tests.html](https://github.com/criesbeck/cs325-js/blob/master/basic-tests.html) a few 
 warmup exercises involving looping, to get you used to modern JavaScript iteration
 with **map** and such, rather than **for** or **while**.
 Solutions should be defined in the file **basic-solutions.js**.
-* [Matcher](https://github.com/criesbeck/cs325-js/blob/master/matcher-tests.html): a more
+* [matcher-tests.html](https://github.com/criesbeck/cs325-js/blob/master/matcher-tests.html): a more
 challenging set of exercises that incrementally develops a recursive object pattern matcher.
 Solutions should be defined in the file **matcher-solutions.js**.
 
@@ -75,7 +71,7 @@ Unless specified otherwise by the exercise requirements, solution code should no
 Open **docs/tests.html** in your browser.
 
 The first exercise in **docs/tests.html** is **sumOfSquares**. The QUnit report should say that
-a few tests pass, but some file.
+a few tests pass, but others fail.
 
 Click on <button>?</button>  next to **sumOfSquares** to see what is required.
 
