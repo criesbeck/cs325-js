@@ -1,10 +1,25 @@
-// define the test modules
+// Deferring running tests until tests and solutions have been loaded
+QUnit.config.autostart = false;
 
-let exercises = {};
+// load test JSON then the solution code, if any
+function loadTests(url) {
+  fetch(url).then((response) => {
+    if (!response.ok) {
+      throw new Error(response);
+    }
+    return response.json();
+  }).then((json) => {
+    defineTestModules(json.modules);
+    addExerciseDescriptions(json.modules);
+    loadSolutions(json.name);
+  })
+    .catch((error) => { console.log('Error', error); });
+}
 
-function defineTestModules() {
-  Object.keys(exercises).forEach((moduleName) => {
-    const module = exercises.modules[moduleName];
+// define QUnit test modules
+function defineTestModules(modules) {
+  Object.keys(modules).forEach((moduleName) => {
+    const module = modules[moduleName];
     QUnit.module(moduleName);
     Object.keys(module).forEach((name) => {
       const exercise = module[name];
@@ -19,45 +34,35 @@ function defineTestModules() {
   });
 }
 
-function loadSolutions() {
+// dynamically load test code, run QUnit when done
+function loadSolutions(name) {
   const script = document.createElement('script');
-  script.onload = defineTestModules;
-  script.src = `${exercises.name}-solutions.js`;
+  script.onload = QUnit.start;
+  script.src = `${name}-solutions.js`;
 
   document.head.appendChild(script);
 }
 
-function loadTests(url) {
-  fetch(url).then((response) => {
-    if (!response.ok) {
-      throw new Error(response);
-    }
-    return response.json();
-  }).then((json) => {
-    exercises = json;
-    loadSolutions();
-  })
-    .catch((error) => { console.log('Error', error); });
+// add exercise descriptions to the report when tests complete
+function addExerciseDescriptions(modules) {
+  QUnit.done(() => {
+    const modal = createModal();
+    Array.from(document.querySelectorAll('.module-name'))
+      .forEach((elt) => { attachDescriptionLink(elt.closest('[id]'), modal, modules); });
+  });
 }
 
-// add exercise descriptions to the report when tests complete
-
-QUnit.done(() => {
-  const modal = createModal();
-  Array.from(document.querySelectorAll('.module-name'))
-    .forEach((elt) => { attachDescriptionLink(elt.closest('[id]'), modal); });
-});
-
-function attachDescriptionLink(elt, modal) {
+function attachDescriptionLink(elt, modal, modules) {
   const moduleName = elt.querySelector('.module-name').innerText;
   const testName = elt.querySelector('.test-name').innerText;
-  const exercise = exercises.modules[moduleName] && exercises.modules[moduleName][testName];
+  const module = modules[moduleName];
+  const exercise = module && module[testName];
   if (exercise) {
     const rerunLink = elt.querySelector('a');
     const exerciseLink = document.createElement('button');
     exerciseLink.classList.add('link');
     exerciseLink.appendChild(document.createTextNode('?'));
-    exerciseLink.onclick = () => { showExercise(moduleName, testName, modal); };
+    exerciseLink.onclick = () => { showExercise(module, moduleName, testName, modal); };
     elt.insertBefore(exerciseLink, rerunLink.nextSibling);
   }
 }
@@ -80,7 +85,7 @@ function addElement(html) {
   return document.body.lastChild;
 }
 
-function showExercise(moduleName, testName, modal) {
+function showExercise(module, moduleName, testName, modal) {
   const oldEx = modal.dataset.showing;
   const newEx = moduleName + ':' + testName;
   if (oldEx === newEx) {
@@ -89,13 +94,13 @@ function showExercise(moduleName, testName, modal) {
   else {
     modal.dataset.showing = newEx;
     const contentElt = modal.querySelector('.content');
-    contentElt.innerHTML = makeDescriptionHtml(moduleName, testName);
+    contentElt.innerHTML = makeDescriptionHtml(module, moduleName, testName);
     modal.classList.add('visible');
   }
 }
 
-function makeDescriptionHtml(moduleName, testName) {
-  const exercise = exercises.modules[moduleName][testName];
+function makeDescriptionHtml(module, moduleName, testName) {
+  const exercise = module[testName];
   const links = makeUl('Links', exercise.links, makeLinkHtml);
   const testCases = 
     makeUl('Tests', exercise.tests, test => makeTestCaseHtml(testName, test));

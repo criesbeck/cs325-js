@@ -15,7 +15,9 @@
 <script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
 <script src="js-tester.js"></script>
 <script>
-loadTests('https://raw.githubusercontent.com/criesbeck/cs325-js/master/tests/demo-tests.json');
+  const testName = location.hash ? location.hash.substr(1) : "demo";
+  const testsUrl = `https://raw.githubusercontent.com/criesbeck/cs325-js/master/tests/${testName}-tests.json`;
+  loadTests(testsUrl);
 </script>
 </body>
 </html>
