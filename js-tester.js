@@ -1,25 +1,42 @@
 // define the test modules
-Object.keys(exercises).forEach(moduleName => {
-  const module = exercises[moduleName];
-  QUnit.module(moduleName);
-  Object.keys(module).forEach(name => {
-    const exercise = module[name];
-    QUnit.test(name, assert => {
-      assert.ok(window[name], `${name} is defined`);
-      exercise.tests.forEach(({inputs, output}) => {
-        const inStr = inputs.map(JSON.stringify).join(', ');
-        assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} tested`);
+
+let exercises = {};
+
+function defineTestModules() {
+  Object.keys(exercises).forEach((moduleName) => {
+    const module = exercises[moduleName];
+    QUnit.module(moduleName);
+    Object.keys(module).forEach((name) => {
+      const exercise = module[name];
+      QUnit.test(name, (assert) => {
+        assert.ok(window[name], `${name} is defined`);
+        exercise.tests.forEach(({ inputs, output }) => {
+          const inStr = inputs.map(JSON.stringify).join(', ');
+          assert.deepEqual(window[name].apply(null, inputs), output, `${inStr} tested`);
+        });
       });
     });
   });
-});
+}
+
+function loadTests(url) {
+  fetch(url).then((response) => {
+    if (!response.ok) {
+      throw new Error(response);
+    }
+    return response.json();
+  }).then((json) => {
+    exercises = json;
+    defineTestModules();
+  }).catch((error) => { console.log('Error', error); });
+}
 
 // add exercise descriptions to the report when tests complete
 
-QUnit.done(details => {
+QUnit.done(() => {
   const modal = createModal();
   Array.from(document.querySelectorAll('.module-name'))
-    .forEach(elt => { attachDescriptionLink(elt.closest('[id]'), modal); });
+    .forEach((elt) => { attachDescriptionLink(elt.closest('[id]'), modal); });
 });
 
 function attachDescriptionLink(elt, modal) {
@@ -36,7 +53,7 @@ function attachDescriptionLink(elt, modal) {
   }
 }
 
-// modal for displaying the exercise definition 
+// modal for displaying the exercise definition
 function createModal() {
   const modal =
     addElement('<div class="modal"><span class="close-btn">&cross;</span><div class="content"></div></div>');
@@ -80,7 +97,7 @@ ${links}${testCases}`;
 
 function makeUl(label, lst, fn) {
   return (!lst || lst.length === 0) ? '' : 
-   `<div class="block">${label}:<ul>${lst.map(item => `<li>${fn(item)}</ii>`)
+    `<div class="block">${label}:<ul>${lst.map(item => `<li>${fn(item)}</ii>`)
       .join('')}</ul></div>`;
 }
 
