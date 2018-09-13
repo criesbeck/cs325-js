@@ -1,6 +1,6 @@
 {
     "name": "demo",
-    "tests": {
+    "modules": {
         "basics": {
             "sumOfSquares": {
                 "arguments": "two numbers",

@@ -1,6 +1,6 @@
 {
     "name": "demo",
-    "tests": {
+    "modules": {
         "basic": {
             "backSlice": {
                 "arguments": "an array A and two integers, m and n",
