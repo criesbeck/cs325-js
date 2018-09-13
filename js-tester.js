@@ -4,7 +4,7 @@ let exercises = {};
 
 function defineTestModules() {
   Object.keys(exercises).forEach((moduleName) => {
-    const module = exercises[moduleName];
+    const module = exercises.te[moduleName];
     QUnit.module(moduleName);
     Object.keys(module).forEach((name) => {
       const exercise = module[name];
@@ -51,7 +51,7 @@ QUnit.done(() => {
 function attachDescriptionLink(elt, modal) {
   const moduleName = elt.querySelector('.module-name').innerText;
   const testName = elt.querySelector('.test-name').innerText;
-  const exercise = exercises[moduleName] && exercises[moduleName][testName];
+  const exercise = exercises.tests[moduleName] && exercises.tests[moduleName][testName];
   if (exercise) {
     const rerunLink = elt.querySelector('a');
     const exerciseLink = document.createElement('button');
@@ -95,7 +95,7 @@ function showExercise(moduleName, testName, modal) {
 }
 
 function makeDescriptionHtml(moduleName, testName) {
-  const exercise = exercises[moduleName][testName];
+  const exercise = exercises.tests[moduleName][testName];
   const links = makeUl('Links', exercise.links, makeLinkHtml);
   const testCases = 
     makeUl('Tests', exercise.tests, test => makeTestCaseHtml(testName, test));
