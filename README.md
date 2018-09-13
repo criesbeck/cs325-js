@@ -14,7 +14,7 @@ Tests are stored in JSON files, and run by a generic HTML file, **js-tester.html
 
   * Any modern web browser with a developer console, such as Chrome or Firefox
   * A good text editor, such as Visual Studio Code, BBedit, or Sublime, for editing your JavaScript file
-  * A local web server, e.g., node, PHP, or VS Code's Live Server
+  * A local web server, e.g., node, PHP, or VS Code's Live Server; only static assets are served
 
 ## Installing and testing
 
@@ -47,7 +47,7 @@ function sumOfSquares(x, y) {
 }
 ```
 
-Save ***demo-solutions.js** and reload the web page. The report should show that all tests for **sumOfSquares** pass. 
+Save **demo-solutions.js** and reload the web page. The report should show that all tests for **sumOfSquares** pass. 
 
 To see what tests were run, click on the **sumOfSquares** label in the report.
 
