@@ -19,6 +19,14 @@ function defineTestModules() {
   });
 }
 
+function loadSolutions() {
+  const script = document.createElement('script');
+  script.onload = defineTestModules;
+  script.src = `${exercises.name}-solutions.js`;
+
+  document.head.appendChild(script);
+}
+
 function loadTests(url) {
   fetch(url).then((response) => {
     if (!response.ok) {
@@ -27,8 +35,9 @@ function loadTests(url) {
     return response.json();
   }).then((json) => {
     exercises = json;
-    defineTestModules();
-  }).catch((error) => { console.log('Error', error); });
+    loadSolutions();
+  })
+    .catch((error) => { console.log('Error', error); });
 }
 
 // add exercise descriptions to the report when tests complete
