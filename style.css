@@ -30,3 +30,12 @@
   top: 5px;
   right: 5px;
 }
+.alert {
+  box-shadow: 5px 5px silver;
+  color: rgb(160, 28, 28);
+  font-family: Trebuchet MS, sans-serif;
+  font-size: 150%;
+  margin-left: 20%;
+  padding: 0.5em;
+  width: 60%;
+}

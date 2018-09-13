@@ -26,7 +26,7 @@ git clone https://github.com/criesbeck/cs325-js.git
 
 Otherwise, download the Zip file and extract the files to the desired directory.
 
-Start a local server and open the URL **http://localhost:5500/js-tester.html#demo** to 
+Start a local server and open the URL **http://localhost:5500/js-tester.html** to 
 run the demo set of tests and code. Change 5500 to whatever port your local server
 is using.
 
@@ -37,7 +37,7 @@ You should see a QUnit report on tests that have passed and failed.
 The first failing exercise is **sumOfSquares**. Click on <button>?</button>
 next to **sumOfSquares** to see what is required.
 
-The code being tested is in
+The code being tested is loaded from
 **demo-solutions.js**. Open this file in your text editor or IDE. Change the definition
 of **sumOfSquares** to the correct answer:
 
@@ -60,7 +60,8 @@ Hint: [Open the developer console in your browser](https://developer.mozilla.org
 The exercises are divided into separate JSON files for different topic areas. These files
 are in the **tests** subdirectory.
 
-Note that if you change the hash in a URL, you need to explicitly reload the page.
+Use the URL **http://localhost:5500/js-tester.html?tests=xyz**
+to load the page for the "xyz" set of tests.
 
 * [basic](https://github.com/criesbeck/cs325-js/blob/master/tests/basic-tests.json): a few 
 warmup exercises involving looping, to get you used to modern JavaScript iteration

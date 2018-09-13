@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width">
   <title>JavaScript Basic Tests</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
-  <link rel="stylesheet" href="style.css"><script>
-    const testName = location.hash ? location.hash.substr(1) : "demo";
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const params = new URLSearchParams(document.location.search.substring(1));
+    const testName = params.get('tests') || "demo";
   </script>
 </head>
 <body>
-  <div id="qunit">If you see this, something didn't load. Check the browser console.
-    Did you forget to create the file <strong>
-    <script>document.write(`${testName}-solutions.js`)</script>
-  </strong> ?
+  <div id="qunit">
+    <p class="alert">If you see this, something didn't load correctly. 
+      Check the browser console for error messages.
+      Did you forget to create the file <strong>
+      <script>document.write(`${testName}-solutions.js`)</script>
+      </strong> ?
+    </p>
   </div>
   <div id="qunit-fixture"></div>
 
