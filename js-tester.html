@@ -21,9 +21,7 @@
 <script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
 <script src="js-tester.js"></script>
 <script>
-  const testName = location.hash ? location.hash.substr(1) : "demo";
-  const testsUrl = `tests/${testName}-tests.json`;
-  loadTests(testsUrl);
+  loadTests(`tests/${testName}-tests.json`);
 </script>
 </body>
 </html>

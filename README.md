@@ -60,6 +60,8 @@ Hint: [Open the developer console in your browser](https://developer.mozilla.org
 The exercises are divided into separate JSON files for different topic areas. These files
 are in the **tests** subdirectory.
 
+Note that if you change the hash in a URL, you need to explicitly reload the page.
+
 * [basic](https://github.com/criesbeck/cs325-js/blob/master/tests/basic-tests.json): a few 
 warmup exercises involving looping, to get you used to modern JavaScript iteration
 with **map** and such, rather than **for** or **while**. Create the file
