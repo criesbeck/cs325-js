@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width">
   <title>JavaScript Basic Tests</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"><script>
+    const testName = location.hash ? location.hash.substr(1) : "demo";
+  </script>
 </head>
 <body>
-  <div id="qunit"></div>
+  <div id="qunit">If you see this, something didn't load. Check the browser console.
+    Did you forget to create the file <strong>
+    <script>document.write(`${testName}-solutions.js`)</script>
+  </strong> ?
+  </div>
   <div id="qunit-fixture"></div>
 
 <!-- The testing code -->
